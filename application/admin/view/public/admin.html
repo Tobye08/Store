@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>{{block name="title"}}{{/block}}</title>
+    {{load file='__STATIC__/bootstrap/css/bootstrap.css'}}
+    {{load file='__STATIC__/css/admin/admin.css'}}
+    {{load file='__STATIC__/css/admin/public.css'}}
+    {{block name="link"}}{{/block}}
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" style="border-bottom: #000 1px solid">
+    <div class="container-fluid"   style="background-color: #293544;">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">后台管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse"   style="background-color: #293544;">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown">
+                        <span class="">tobye</span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href=""></a></li>
+                        <li><a href="{{:url('admin/user/change')}}">修改密码</a></li>
+                        <li><a href="{{:url('admin/user/logout')}}">退出登录</a></li>
+                    </ul>
+                </li>
+                <li><a href="{{:url('admin/user/logout')}}"><span class=" glyphicon glyphicon-log-out "></span></a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar" style="padding: 0">
+            <ul class="left-nav">
+                <li class="item">
+                    <div>
+                        <a href="#system" data-toggle="collapse" data-parent="#pgroup">
+                            <span class="glyphicon glyphicon-cog">&nbsp;</span>
+                            <span>系统设置</span>
+                        </a>
+                    </div>
+
+                    <div id="system" class="collapse list">
+                        <ul>
+                            <li>
+                                <a href="{{url('admin/user/add')}}">添加用户</a>
+                            </li>
+                            <li>
+                                <a href="{{url('admin/user/oper')}}">用户管理</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </li>
+
+                <li class="item">
+                    <div>
+                        <a href="#public" data-toggle="collapse" data-parent="#pgroup">
+                            <span class="glyphicon glyphicon-hdd">&nbsp;</span>
+                            <span>公共管理</span>
+                        </a>
+                    </div>
+
+                    <div id="public" class="collapse list">
+                        <ul>
+                            <li>
+                                <a href="{{url('admin/product/index')}}">产品管理</a>
+                            </li>
+                            <li>
+                                <a href="{{url('admin/brand/index')}}">品牌管理</a>
+                            </li>
+                            <li>
+                                <a href="{{url('admin/category/index')}}">分类管理</a>
+                            </li>
+                            <li>
+                                <a href="">上传记录</a>
+                            </li>
+                            <li>
+                                <a href="">连接管理</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </li>
+                <li class="item">
+                    <a href="">
+                        <span class="glyphicon glyphicon-user">&nbsp;</span>
+                        <span>关于我们</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="">
+                        <span class="glyphicon glyphicon-asterisk">&nbsp;</span>
+                        <span>产品案例</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="">
+                        <span class="glyphicon glyphicon-record">&nbsp;</span>
+                        <span>核心团队</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="">
+                        <span class="glyphicon glyphicon-duplicate">&nbsp;</span>
+                        <span>新闻动态</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="">
+                        <span class="glyphicon glyphicon-phone-alt">&nbsp;</span>
+                        <span>联系我们</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="">
+                        <span class="glyphicon glyphicon-knight">&nbsp;</span>
+                        <span>诚聘英才</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="">
+                        <span class="glyphicon glyphicon-question-sign">&nbsp;</span>
+                        <span>留言咨询</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="title">
+            <span>管理平台></span>
+            <span>{{block name="title"}}{{/block}}</span>
+            </div>
+            
+            {{block name="main"}}{{/block}}
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="{{__STATIC__/js/jquery-3.3.1.min.js}}"></script>
+<script type="text/javascript" src="{{__STATIC__\bootstrap\js\bootstrap.min.js}}"></script>
+<script>
+    var num = 3;
+    function changeNum() {
+        num--;
+        if (num == 0) {
+            document.getElementById('message').style.display = 'none';
+        } else {
+            document.getElementById('s').innerHTML = num;
+            setTimeout(changeNum, 1000);
+        }
+    }
+    setTimeout(changeNum, 1000);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+@extends('layouts/admin')
+@section('title','添加新产品')
+@section('main.title','添加新产品')
+@section('main')
+    <form action="{{url('admin/product/save')}}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label class="control-label">产品名称:</label>
+            <input type="text" name="title" class="form-control">
+            <span class="help-block">请输入产品名称</span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">产品图片:</label>
+            <input type="file" name="upload[]" multiple="multiple">
+            <span class="help-block">请选择产品图片</span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">产品价格:</label>
+            <input type="text" name="price" class="form-control">
+            <span class="help-block">请输入产品价格</span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">打折价格:</label>
+            <input type="text" name="saleprice" class="form-control">
+            <span class="help-block">请输入打折价格</span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">打折数量:</label>
+            <input type="text" name="salenum" class="form-control">
+            <span class="help-block">请输入打折数量</span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">产品库存:</label>
+            <input type="text" name="libnum" class="form-control">
+            <span class="help-block">请输入产品库存</span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">产品描述:</label>
+            <textarea name="content" class="form-control"></textarea>
+            <span class="help-block">请输入产品描述</span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">产品分类：</label>
+            <select name="cid" class="form-control" onchange="getBrand()">
+                @foreach($category as $v)
+                    <option value="{{$v['id']}}">{{$v['cname']}}</option>
+                @endforeach
+            </select>
+            <span class="help-block">请选择父级分类</span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">产品品牌：</label>
+            <select name="bid" class="form-control">
+                @foreach($brand as $v)
+                    <option value="{{$v->id}}">{{$v->bname}}</option>
+                @endforeach
+            </select>
+            <span class="help-block">请选择父级分类</span>
+        </div>
+
+
+        <div class="form-group">
+            <input type="submit" value="提交" class="btn btn-primary">
+        </div>
+        {{csrf_field()}}
+    </form>
+
+    <script type="text/javascript">
+        function getBrand() {
+            var cid = $("[name='cid']").val();
+            $.ajax({
+                url: "{{url('admin/product/getBrand')}}",
+                data: "cid="+cid,
+                type: 'get',
+                dataType: 'json',
+                success: function (re) {
+                    var bid;
+                    var bname;
+                    $("[name='bid']").empty();
+                    for (var i = 0; i < re.length; i++) {
+                        bid = re[i].id;
+                        bname = re[i].bname;
+                        $("[name='bid']").append("<option value='" + bid + "'>"+bname+"</option>")
+                    }
+
+                }
+            });
+        }
+    </script>
+@endsection

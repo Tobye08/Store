@@ -1,0 +1,31 @@
+@extends('layouts/admin')
+@section('title','添加品牌')
+@section('main.title','添加品牌')
+@section('main')
+    <form action="{{url('admin/brand/save')}}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label class="control-label">分类：</label>
+            <select name="cid" class="form-control">
+                @foreach($category as $v)
+                    <option value="{{$v->id}}">{{$v->cname}}</option>
+                @endforeach
+            </select>
+            <span class="help-block">请选择品牌分类</span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">品牌名称:</label>
+            <input type="text" name="bname" class="form-control">
+            <span class="help-block">请输入品牌名称</span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">品牌logo:</label>
+            <input type="file" name="upload">
+            <span class="help-block">请选择品牌logo</span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="提交" class="btn btn-primary">
+        </div>
+        {{csrf_field()}}
+    </form>
+@endsection

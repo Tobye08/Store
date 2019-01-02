@@ -1,0 +1,73 @@
+@extends('layouts/admin')
+@section('title','产品管理')
+@section('link')
+    {{--<script type="text/javascript" src="{{asset('common')}}/assets/js/jtbc.js"></script>--}}
+    {{--<script type="text/javascript" src="{{asset('common')}}/assets/js/jtbc.console.min.js"></script>--}}
+    {{--<link rel="stylesheet" href="{{asset('common')}}/assets/global.css">--}}
+    <link rel="stylesheet" href="{{asset('css')}}/admin/category/index.css">
+@endsection
+@section('main.title','产品管理')
+@section('main')
+    <div class="manager">
+        <a class="path">产品案例 :</a>
+        <div class="tablelist">
+            <h3>产品列表</h3>
+            <div class="path-right">
+                <span class="show-1">
+                    <a href="{{url('admin/product/add')}}">
+                        <button class="button">添加新产品</button>
+                    </a>
+                </span>
+            </div>
+
+            <table class="table table-condensed table-striped table-hover table-responsive">
+                <thead>
+                <th><input type="checkbox"></th>
+                <th>ID</th>
+                <th>产品名称</th>
+                <th>产品价格</th>
+                <th>打折价格</th>
+                <th>打折数量</th>
+                <th>产品库存</th>
+                <th>产品描述</th>
+                <th>产品分类</th>
+                <th>产品品牌</th>
+                <th>创建时间</th>
+                <th>更新时间</th>
+                </thead>
+                <tbody>
+                @foreach($cols as $v)
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$v->title}}</td>
+                        <td>{{$v->price}}</td>
+                        <td>{{$v->saleprice}}</td>
+                        <td>{{$v->salenum}}</td>
+                        <td>{{$v->libnum}}</td>
+                        <td>{{$v->content}}</td>
+                        <td>{{$v->cid}}</td>
+                        <td>{{$v->bid}}</td>
+                        <td>{{$v->createtime}}</td>
+                        <td>{{$v->updatetime}}</td>
+                        <td>
+                            <a href="{{url('admin/product/update',['id'=>$v['id']])}}"><span class="glyphicon glyphicon-edit"></span>&nbsp;</a>
+                            <a href="{{url('admin/product/del',['id'=>$v['id']])}}"><span class="glyphicon glyphicon-trash"></span></a>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+            <div class="control">
+                <div mode="batchswitch" class="batch show-1" modebinded="true"><span
+                            class="text">对选中记录进行批量切换操作</span><select class="batch">
+                        <option value="null">请选择</option>
+                        <option value="delete">删除</option>
+                    </select><span class="ok" confirm_b3="取消操作" confirm_b2="确认操作"
+                                   confirm_text="确认对选中的进行批量操作吗？"><a href="">确认操作</a></span>
+                </div>
+                <div class="pagi"></div>
+            </div>
+        </div>
+    </div>
+@endsection

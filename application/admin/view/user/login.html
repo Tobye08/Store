@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>管理员登录</title>
+    {{load file='__STATIC__/bootstrap/css/bootstrap.css'}}
+    {{load file='__STATIC__/css/admin/user/register.css'}}
+</head>
+<body>
+<div class="register">
+    <h1>管理员登录</h1>
+    <form action="{{:url('admin/user/check')}}" method="post">
+        <div class="field">
+            <span class="img glyphicon glyphicon-user"></span>
+            <input type="text" name="phone" placeholder="手机号">
+        </div>
+
+        <div class="field">
+            <span class="img glyphicon glyphicon-lock"></span>
+            <input type="password" name="password" placeholder="确认密码">
+        </div>
+
+        <div class="field">
+            <span class="img glyphicon glyphicon-check"></span>
+            <input type="text" name="captcha" placeholder="验证码">
+        </div>
+
+        <div class="captcha">
+            <img src="{{:captcha_src()}}" id="captcha" style="width: 50%">
+            <span>点击图片更新验证码</span>
+        </div>
+
+        <div class="button">
+            <input type="submit" class="btn" value="登录">
+        </div>
+    </form>
+</div>
+<script>
+    var c = document.getElementById('captcha');
+    c.onclick = function () {
+        this.src = "{{:captcha_src()}}?rand=" + Math.random();
+    }
+</script>
+</body>
+</html>

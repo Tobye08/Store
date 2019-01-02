@@ -1,0 +1,59 @@
+@extends('layouts/admin')
+@section('title','品牌管理')
+@section('link')
+    <link rel="stylesheet" href="{{asset('css')}}/admin/category/index.css">
+@endsection
+@section('main.title','品牌管理')
+@section('main')
+    <div class="manager">
+        <div class="tablelist">
+            <h3>分类列表</h3>
+            <div class="path-right">
+                <span class="show-1">
+                    <a href="{{url('admin/brand/add')}}">
+                        <button class="button">添加新分类</button>
+                    </a>
+                </span>
+            </div>
+
+            <table class="table table-condensed table-striped table-hover table-responsive">
+                <thead>
+                <th><input type="checkbox"></th>
+                <th>ID</th>
+                <th>品牌名称</th>
+                <th>品牌logo</th>
+                <th>品牌分类</th>
+                <th>操作</th>
+                </thead>
+                <tbody>
+                @foreach($brand as $v)
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$v->bname}}</td>
+                        <td><img src="{{asset("upload")}}/{{$v->logo}}" alt="" style="height: 60px;"></td>
+                        <td>{{$v->cid}}</td>
+                        <td>
+                            <a href="{{url('admin/brand/update',['id'=>$v->id])}}"><span
+                                        class="glyphicon glyphicon-edit"></span>&nbsp;</a>
+                            <a href="{{url('admin/brand/del',['id'=>$v->id])}}"><span
+                                        class="glyphicon glyphicon-trash"></span></a>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+            <div class="control">
+                <div mode="batchswitch" class="batch show-1" modebinded="true"><span
+                            class="text">对选中记录进行批量切换操作</span><select class="batch">
+                        <option value="null">请选择</option>
+                        <option value="delete">删除</option>
+                    </select><span class="ok" confirm_b3="取消操作" confirm_b2="确认操作"
+                                   confirm_text="确认对选中的进行批量操作吗？">确认操作</span>
+                </div>
+                <div class="pagi"></div>
+            </div>
+        </div>
+    </div>
+
+@endsection

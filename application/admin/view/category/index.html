@@ -1,0 +1,65 @@
+@extends('layouts/admin')
+@section('title','分类管理')
+@section('link')
+    {{--<script type="text/javascript" src="{{asset('common')}}/assets/js/jtbc.js"></script>--}}
+    {{--<script type="text/javascript" src="{{asset('common')}}/assets/js/jtbc.console.min.js"></script>--}}
+    {{--<link rel="stylesheet" href="{{asset('common')}}/assets/global.css">--}}
+    <link rel="stylesheet" href="{{asset('css')}}/admin/category/index.css">
+@endsection
+@section('main.title','分类管理')
+@section('main')
+    <div class="manager">
+        <a class="path">产品案例 :</a>
+        <div class="tablelist">
+            <h3>分类列表</h3>
+            <div class="path-right">
+                <span class="text">所属模块</span>
+                <select name="genre" class="select">
+                    <option value="case" selected="selected">产品案例 [case]</option>
+                    <option value="news">新闻动态 [news]</option>
+                </select>
+                <span class="show-1">
+                    <a href="{{url('admin/category/add')}}">
+                        <button class="button">添加新分类</button>
+                    </a>
+                </span>
+            </div>
+
+            <table class="table table-condensed table-striped table-hover table-responsive">
+                <thead>
+                <th><input type="checkbox"></th>
+                <th>ID</th>
+                <th>分类名</th>
+                <th>时间</th>
+                <th>操作</th>
+                </thead>
+                <tbody>
+                @foreach($category as $v)
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>{{$loop->iteration}}</td>
+{{--                        <td>{{$v['id']}}</td>--}}
+                        <td>{{$v['cname']}}</td>
+                        <td>{{$v['createtime']}}</td>
+                        <td>
+                            <a href="{{url('admin/category/update',['id'=>$v['id']])}}"><span class="glyphicon glyphicon-edit"></span>&nbsp;</a>
+                            <a href="{{url('admin/category/del',['id'=>$v['id']])}}"><span class="glyphicon glyphicon-trash"></span></a>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+            <div class="control">
+                <div mode="batchswitch" class="batch show-1" modebinded="true"><span
+                            class="text">对选中记录进行批量切换操作</span><select class="batch">
+                        <option value="null">请选择</option>
+                        <option value="delete">删除</option>
+                    </select><span class="ok" confirm_b3="取消操作" confirm_b2="确认操作"
+                                   confirm_text="确认对选中的进行批量操作吗？">确认操作</span>
+                </div>
+                <div class="pagi"></div>
+            </div>
+        </div>
+    </div>
+
+@endsection
