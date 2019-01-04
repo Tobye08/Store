@@ -17,6 +17,22 @@ class User extends Controller
     }
 
     /**
+     * 执行添加管理员
+     */
+    public function doadd()
+    {
+        $phone = input('param.phone');
+    }
+
+    /**
+     * 添加管理员
+     */
+    public function add()
+    {
+        return $this->fetch();
+    }
+
+    /**
      * 退出登录
      */
     public function logout()

@@ -1,11 +1,16 @@
-@extends('layouts/admin')
-@section('title','添加用户')
-@section('link')
-    <link rel="stylesheet" type="text/css" href="{{asset('css/admin/user/add.css')}}">
-@endsection
-@section('main.title','添加用户')
-@section('main')
-    <form action="{{url('admin/user/doadd')}}" method="post" class="form">
+{{extend block name='public/admin'}}
+{{block name='title'}}添加用户{{/block}}
+{{block name='link'}}
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/admin/user/add.css">
+{{/block}}
+{{block name='title'}}添加用户{{/block}}
+{{block name='main'}}
+    <form action="{{:url('admin/user/doadd')}}" method="post" class="form">
+        <div class="field">
+            <span class="img glyphicon glyphicon-phone"></span>
+            <input type="text" name="phone" placeholder="手机号">
+        </div>
+
         <div class="field">
             <span class="img glyphicon glyphicon-user"></span>
             <input type="text" name="username" placeholder="用户名">
@@ -29,6 +34,5 @@
         <div class="button">
             <input type="submit" class="btn btn-primary" value="添加">
         </div>
-        {{csrf_field()}}
     </form>
-@endsection
+{{/block}}

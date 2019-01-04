@@ -64,10 +64,10 @@
                     <div id="system" class="collapse list">
                         <ul>
                             <li>
-                                <a href="{{url('admin/user/add')}}">添加用户</a>
+                                <a href="{{:url('admin/user/add')}}">添加用户</a>
                             </li>
                             <li>
-                                <a href="{{url('admin/user/oper')}}">用户管理</a>
+                                <a href="{{:url('admin/user/oper')}}">用户管理</a>
                             </li>
                         </ul>
                     </div>
@@ -85,13 +85,13 @@
                     <div id="public" class="collapse list">
                         <ul>
                             <li>
-                                <a href="{{url('admin/product/index')}}">产品管理</a>
+                                <a href="{{:url('admin/product/index')}}">产品管理</a>
                             </li>
                             <li>
-                                <a href="{{url('admin/brand/index')}}">品牌管理</a>
+                                <a href="{{:url('admin/brand/index')}}">品牌管理</a>
                             </li>
                             <li>
-                                <a href="{{url('admin/category/index')}}">分类管理</a>
+                                <a href="{{:url('admin/category/index')}}">分类管理</a>
                             </li>
                             <li>
                                 <a href="">上传记录</a>
@@ -158,8 +158,8 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="{{__STATIC__/js/jquery-3.3.1.min.js}}"></script>
-<script type="text/javascript" src="{{__STATIC__\bootstrap\js\bootstrap.min.js}}"></script>
+<script type="text/javascript" src="__STATIC__/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="__STATIC__\bootstrap\js\bootstrap.min.js"></script>
 <script>
     var num = 3;
     function changeNum() {

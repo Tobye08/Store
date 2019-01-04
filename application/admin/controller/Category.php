@@ -6,6 +6,14 @@ use think\Controller;
 class Category extends Controller
 {
     /**
+     * 保存添加的分类
+     */
+    public function save()
+    {
+
+    }
+
+    /**
      * 添加分类
      */
     public function add()
