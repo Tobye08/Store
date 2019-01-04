@@ -23,6 +23,7 @@ class User extends Controller
     {
         $phone = input('param.phone');
         $username = input('param.username');
+        $password = input('param.password');
     }
 
     /**
