@@ -22,6 +22,7 @@ class User extends Controller
     public function doadd()
     {
         $phone = input('param.phone');
+        $username = input('param.username');
     }
 
     /**
