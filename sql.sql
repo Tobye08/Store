@@ -17,7 +17,7 @@ create table `store_category`(
  `pid` int not null default 0 comment '父id',
  `createtime` datetime comment '创建时间',
  `updatetime` datetime comment '更新时间'
-)engine=InnoDB charset=UTF8;
+)engine=InnoDB charset=UTF8 comment="分类表";
 
 create table `store_product`(
  `id` int unsigned primary key auto_increment comment '主键',
@@ -31,20 +31,20 @@ create table `store_product`(
  `bid` int not null comment '品牌id',
  `createtime` datetime comment '创建时间',
  `updatetime` datetime comment '更新时间'
-)engine=InnoDB charset=UTF8;
+)engine=InnoDB charset=UTF8 comment='产品表';
 
 create table `store_productimg`(
  `id` int unsigned primary key auto_increment comment '主键',
  `path` varchar(100) not null comment '产品名称',
  `pid` int unsigned comment '产品ID'
-)engine=InnoDB charset=UTF8;
+)engine=InnoDB charset=UTF8 comment='产品图片表';
 
 create table `store_brand`(
  `id` int unsigned primary key auto_increment comment '主键',
  `bname` varchar(50) not null comment '产品名称',
  `logo` varchar(100) comment '品牌图标',
  `cid` int not null default 0 comment '分类id'
-)engine=InnoDB charset=UTF8;
+)engine=InnoDB charset=UTF8 comment='品牌表';
 
 
 

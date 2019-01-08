@@ -1,7 +1,9 @@
 <?php
+
 namespace app\admin\controller;
 
 use think\Controller;
+use app\admin\model\User as UserBlog;
 
 class User extends Controller
 {
@@ -17,13 +19,80 @@ class User extends Controller
     }
 
     /**
+     * 保存修改
+     */
+    public function usave()
+    {
+        $id = input('param.id');
+        $password = input('param.password');
+        $password_confirmation = input('param.password_confirmation');
+
+        if ($password != $password_confirmation) {
+            return $this->error('两次密码不一致');
+        }
+
+        $args = [
+            'phone' => input('param.phone'),
+            'username' => input('param.username'),
+            'email' => input('param.email'),
+        ];
+
+        if ($password && $password_confirmation) {
+            $args ['password'] = md5($password);
+        }
+
+        $res = model('user')
+            ->where('id', 'eq', $id)
+            ->update($args);
+
+        return $res ? $this->success('修改成功') : $this->error('修改失败');
+    }
+
+    /**
+     * 修改用户
+     */
+    public function update()
+    {
+        $id = input('param.id');
+        $user = model('user')
+            ->field('*')
+            ->where('id', 'eq', $id)
+            ->find();
+
+        $this->assign('user', $user);
+        return $this->fetch();
+    }
+
+    /**
+     * 用户管理
+     */
+    public function oper()
+    {
+        $list = model('user')->getUser();
+        $this->assign('list', $list);
+        return $this->fetch();
+    }
+
+    /**
      * 执行添加管理员
      */
     public function doadd()
     {
-        $phone = input('param.phone');
-        $username = input('param.username');
-        $password = input('param.password');
+        $args = [
+            "phone" => input('param.phone'),
+            "username" => input('param.username'),
+            "password" => md5(input('param.password')),
+            "email" => input('param.email'),
+        ];
+
+        $password_confirmation = input('param.password_confirmation');
+        if ($args['password'] != $password_confirmation) {
+            return $this->error('两次密码不一致');
+        }
+
+        $res = model('user')->data($args)->save();
+
+        return $res ? $this->success('添加用户成功') : $this->error('添加用户失败');
     }
 
     /**
@@ -52,7 +121,7 @@ class User extends Controller
         $username = input('param.username');
         $password = input('param.password');
         $password_confirmation = input('param.password_confirmation');
-        
+
         if ($password != $password_confirmation) {
             return $this->error('两次密码不一致');
         }
@@ -64,8 +133,13 @@ class User extends Controller
                 'password' => md5($password),
             ]);
 
+        $user = db('user')
+            ->field('*')
+            ->where('phone', 'eq', $phone)
+            ->select();
+
         if ($res) {
-            session('admin', $username);
+            session('admin', $user);
             return $this->success('注册成功', url('admin/index/index'));
         } else {
             return $this->error('输入错误');
@@ -93,7 +167,7 @@ class User extends Controller
         };
 
         $admin = db('user')
-            ->field('id,phone,username')
+            ->field('*')
             ->where('phone', 'eq', $phone)
             ->where('password', 'eq', $password)
             ->where('admin', 'eq', 1)

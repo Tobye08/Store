@@ -10,7 +10,7 @@ class Category extends Controller
      */
     public function save()
     {
-
+        return $this->fetch();
     }
 
     /**
