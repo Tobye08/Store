@@ -1,16 +1,15 @@
-@extends('layouts/admin')
-@section('title','品牌管理')
-@section('link')
-    <link rel="stylesheet" href="{{asset('css')}}/admin/category/index.css">
-@endsection
-@section('main.title','品牌管理')
-@section('main')
+{{extend name="public/admin"}}
+{{block name="title"}}品牌管理{{/block}}
+{{block name="link"}}
+    <link rel="stylesheet" href="__CSS__/admin/category/index.css">
+{{/block}}
+{{block name="main"}}
     <div class="manager">
         <div class="tablelist">
             <h3>分类列表</h3>
             <div class="path-right">
                 <span class="show-1">
-                    <a href="{{url('admin/brand/add')}}">
+                    <a href="{{:url('admin/brand/add')}}">
                         <button class="button">添加新分类</button>
                     </a>
                 </span>
@@ -26,21 +25,21 @@
                 <th>操作</th>
                 </thead>
                 <tbody>
-                @foreach($brand as $v)
+                {{volist name="brand" id="v"}}
                     <tr>
                         <td><input type="checkbox"></td>
-                        <td>{{$loop->iteration}}</td>
+                        <td>{{$v->id}}</td>
                         <td>{{$v->bname}}</td>
-                        <td><img src="{{asset("upload")}}/{{$v->logo}}" alt="" style="height: 60px;"></td>
+                        <td><img src="__STATIC__/upload/{{$v->logo}}" alt="" style="height: 60px;"></td>
                         <td>{{$v->cid}}</td>
                         <td>
-                            <a href="{{url('admin/brand/update',['id'=>$v->id])}}"><span
+                            <a href="{{:url('admin/brand/update',['id'=>$v->id])}}"><span
                                         class="glyphicon glyphicon-edit"></span>&nbsp;</a>
-                            <a href="{{url('admin/brand/del',['id'=>$v->id])}}"><span
+                            <a href="{{:url('admin/brand/del',['id'=>$v->id])}}"><span
                                         class="glyphicon glyphicon-trash"></span></a>
                         </td>
                     </tr>
-                @endforeach
+                {{/volist}}
                 </tbody>
             </table>
             <div class="control">
@@ -56,4 +55,4 @@
         </div>
     </div>
 
-@endsection
+{{/block}}

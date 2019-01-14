@@ -1,14 +1,13 @@
-@extends('layouts/admin')
-@section('title','添加品牌')
-@section('main.title','添加品牌')
-@section('main')
-    <form action="{{url('admin/brand/save')}}" method="post" enctype="multipart/form-data">
+{{extend name="public/admin"}}
+{{block name="title"}}品牌管理{{/block}}
+{{block name="main"}}
+    <form action="{{:url('admin/brand/save')}}" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label class="control-label">分类：</label>
             <select name="cid" class="form-control">
-                @foreach($category as $v)
+                {{volist name="category" id="v"}}
                     <option value="{{$v->id}}">{{$v->cname}}</option>
-                @endforeach
+                {{/volist}}
             </select>
             <span class="help-block">请选择品牌分类</span>
         </div>
@@ -26,6 +25,5 @@
         <div class="form-group">
             <input type="submit" value="提交" class="btn btn-primary">
         </div>
-        {{csrf_field()}}
     </form>
-@endsection
+{{/block}}

@@ -1,13 +1,13 @@
-@extends('layouts/admin')
-@section('title','分类管理')
-@section('link')
-    {{--<script type="text/javascript" src="{{asset('common')}}/assets/js/jtbc.js"></script>--}}
-    {{--<script type="text/javascript" src="{{asset('common')}}/assets/js/jtbc.console.min.js"></script>--}}
-    {{--<link rel="stylesheet" href="{{asset('common')}}/assets/global.css">--}}
-    <link rel="stylesheet" href="{{asset('css')}}/admin/category/index.css">
-@endsection
-@section('main.title','分类管理')
-@section('main')
+{{extend name="public/admin"}}
+{{block name="title"}}{{/block}}
+{{block name="link"}}
+    <script type="text/javascript" src="asset('common')/assets/js/jtbc.js"></script>
+    <script type="text/javascript" src="{{asset('common')}}/assets/js/jtbc.console.min.js"></script>--}}
+    <link rel="stylesheet" href="{{asset('common')}}/assets/global.css">
+    <link rel="stylesheet" href="__CSS__/admin/category/index.css">
+{{/block}}
+
+{{block name="main"}}
     <div class="manager">
         <a class="path">产品案例 :</a>
         <div class="tablelist">
@@ -19,7 +19,7 @@
                     <option value="news">新闻动态 [news]</option>
                 </select>
                 <span class="show-1">
-                    <a href="{{url('admin/category/add')}}">
+                    <a href="{{:url('admin/category/add')}}">
                         <button class="button">添加新分类</button>
                     </a>
                 </span>
@@ -34,19 +34,18 @@
                 <th>操作</th>
                 </thead>
                 <tbody>
-                @foreach($category as $v)
+                {{volist name="category" id="v"}}
                     <tr>
                         <td><input type="checkbox"></td>
-                        <td>{{$loop->iteration}}</td>
-{{--                        <td>{{$v['id']}}</td>--}}
+                        <td>{{$v['id']}}</td>
                         <td>{{$v['cname']}}</td>
-                        <td>{{$v['createtime']}}</td>
+                        <td>{{$v['create_time']}}</td>
                         <td>
-                            <a href="{{url('admin/category/update',['id'=>$v['id']])}}"><span class="glyphicon glyphicon-edit"></span>&nbsp;</a>
-                            <a href="{{url('admin/category/del',['id'=>$v['id']])}}"><span class="glyphicon glyphicon-trash"></span></a>
+                            <a href="{{:url('admin/category/update',['id'=>$v['id']])}}"><span class="glyphicon glyphicon-edit"></span>&nbsp;</a>
+                            <a href="{{:url('admin/category/del',['id'=>$v['id']])}}"><span class="glyphicon glyphicon-trash"></span></a>
                         </td>
                     </tr>
-                @endforeach
+                {{/volist}}
                 </tbody>
             </table>
             <div class="control">
@@ -62,4 +61,4 @@
         </div>
     </div>
 
-@endsection
+{{/block}}

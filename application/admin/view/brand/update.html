@@ -1,15 +1,14 @@
-@extends('layouts/admin')
-@section('title','修改品牌')
-@section('main.title','修改品牌')
-@section('main')
-    <form action="{{url('admin/brand/usave')}}" method="post" enctype="multipart/form-data">
+{{extend name="public/admin"}}
+{{block name="title"}}修改品牌{{/block}}
+{{block name="main"}}
+    <form action="{{:url('admin/brand/usave')}}" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="{{$col->id}}">
         <div class="form-group">
             <label class="control-label">分类：</label>
             <select name="cid" class="form-control">
-                @foreach($category as $v)
-                    <option value="{{$v->id}}"@if($col->cid == $v->id) selected="selected" @endif>{{$v->cname}}</option>
-                @endforeach
+                {{volist name="category" id="v"}}
+                    <option value="{{$v->id}}"{{if condition="$col->cid == $v->id"}}selected="selected"{{/if}}>{{$v->cname}}</option>
+                {{/volist}}
             </select>
             <span class="help-block">请重新选择品牌分类</span>
         </div>
@@ -23,7 +22,7 @@
         </div>
         <div class="form-group">
             <label class="control-label">品牌logo:</label>
-            <div style="margin-bottom: 10px;"><img src="{{asset('upload')}}/{{$col->logo}}" alt="" style="height: 60px;"></div>
+            <div style="margin-bottom: 10px;"><img src="__STATIC__/upload/{{$col->logo}}" alt="" style="height: 60px;"></div>
             <input type="file" name="upload">
             <span class="help-block">请重新选择品牌logo</span>
         </div>
@@ -31,6 +30,5 @@
         <div class="form-group">
             <input type="submit" value="修改" class="btn btn-primary">
         </div>
-        {{csrf_field()}}
     </form>
-@endsection
+{{/block}}

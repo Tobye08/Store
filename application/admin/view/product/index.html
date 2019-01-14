@@ -1,20 +1,16 @@
-@extends('layouts/admin')
-@section('title','产品管理')
-@section('link')
-    {{--<script type="text/javascript" src="{{asset('common')}}/assets/js/jtbc.js"></script>--}}
-    {{--<script type="text/javascript" src="{{asset('common')}}/assets/js/jtbc.console.min.js"></script>--}}
-    {{--<link rel="stylesheet" href="{{asset('common')}}/assets/global.css">--}}
-    <link rel="stylesheet" href="{{asset('css')}}/admin/category/index.css">
-@endsection
-@section('main.title','产品管理')
-@section('main')
+{{extend name="public/admin"}}
+{{block name="title"}}产品管理{{/block}}
+{{block name="link"}}
+    <link rel="stylesheet" href="__CSS__/admin/category/index.css">
+{{/block}}
+{{block name="main"}}
     <div class="manager">
         <a class="path">产品案例 :</a>
         <div class="tablelist">
             <h3>产品列表</h3>
             <div class="path-right">
                 <span class="show-1">
-                    <a href="{{url('admin/product/add')}}">
+                    <a href="{{:url('admin/product/add')}}">
                         <button class="button">添加新产品</button>
                     </a>
                 </span>
@@ -36,10 +32,10 @@
                 <th>更新时间</th>
                 </thead>
                 <tbody>
-                @foreach($cols as $v)
+                {{volist name="cols" id="v"}}
                     <tr>
                         <td><input type="checkbox"></td>
-                        <td>{{$loop->iteration}}</td>
+                        <td>{{$v->id}}</td>
                         <td>{{$v->title}}</td>
                         <td>{{$v->price}}</td>
                         <td>{{$v->saleprice}}</td>
@@ -48,14 +44,14 @@
                         <td>{{$v->content}}</td>
                         <td>{{$v->cid}}</td>
                         <td>{{$v->bid}}</td>
-                        <td>{{$v->createtime}}</td>
-                        <td>{{$v->updatetime}}</td>
+                        <td>{{$v->create_time}}</td>
+                        <td>{{$v->update_time}}</td>
                         <td>
-                            <a href="{{url('admin/product/update',['id'=>$v['id']])}}"><span class="glyphicon glyphicon-edit"></span>&nbsp;</a>
-                            <a href="{{url('admin/product/del',['id'=>$v['id']])}}"><span class="glyphicon glyphicon-trash"></span></a>
+                            <a href="{{:url('admin/product/update',['id'=>$v['id']])}}"><span class="glyphicon glyphicon-edit"></span>&nbsp;</a>
+                            <a href="{{:url('admin/product/del',['id'=>$v['id']])}}"><span class="glyphicon glyphicon-trash"></span></a>
                         </td>
                     </tr>
-                @endforeach
+                {{/volist}}
                 </tbody>
             </table>
             <div class="control">
@@ -70,4 +66,4 @@
             </div>
         </div>
     </div>
-@endsection
+{{/block}}

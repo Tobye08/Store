@@ -19,6 +19,19 @@ class User extends Controller
     }
 
     /**
+     * 删除用户
+     */
+    public function del()
+    {
+        $id = input('param.id');
+        $res = model('user')
+            ->where('id','eq',$id)
+            ->delete();
+
+        return $res ? $this->success('删除成功') : $this->error('删除失败');
+    }
+
+    /**
      * 保存修改
      */
     public function usave()
@@ -126,8 +139,8 @@ class User extends Controller
             return $this->error('两次密码不一致');
         }
 
-        $res = db('user')
-            ->insert([
+        $res = model('user')
+            ->save([
                 'phone' => $phone,
                 'username' => $username,
                 'password' => md5($password),

@@ -1,8 +1,7 @@
-@extends('layouts/admin')
-@section('title','修改产品')
-@section('main.title','修改产品')
-@section('main')
-    <form action="{{url('admin/product/usave')}}" method="post" enctype="multipart/form-data">
+{{extend name="public/admin"}}
+{{block name="title"}}修改产品{{/block}}
+{{block name="main"}}
+    <form action="{{:url('admin/product/usave')}}" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="{{$col->id}}">
         <div class="form-group">
             <label class="control-label">产品名称:</label>
@@ -14,17 +13,17 @@
             <div>
                 <table>
                     <tr>
-                        @foreach($img as $v)
+                        {{volist name="img" id="v"}}
                             <td id="td_{{$v->id}}">
-                                <img src="{{asset('upload')}}/{{$v->path}}" style="height: 60px;">
+                                <img src="__STATIC__/upload/{{$v->path}}" style="height: 150px;">
                                 <br>
                                 <a href="javascript:delImg('{{$v->id}}')">删除</a>
                             </td>
-                        @endforeach
+                        {{/volist}}
                     </tr>
                 </table>
             </div>
-            <input type="file" name="upload[]" multiple="multiple">
+            <input type="file" name="image[]" multiple="multiple">
             <span class="help-block">请选择产品图片</span>
         </div>
 
@@ -56,20 +55,21 @@
         <div class="form-group">
             <label class="control-label">产品分类：</label>
             <select name="cid" class="form-control">
-                @foreach($category as $v)
-                    <option value="{{$v['id']}}"
-                            @if($v['id'] == $col->cid) selected="selected" @endif>{{$v['cname']}}</option>
-                @endforeach
+                {{volist name="category" id="v"}}
+                    <option value="{{$v.id}}" {{if condition='$v.id == $col->cid'}}selected="selected"{{/if}}>
+                            {{$v['cname']}}</option>
+                {{/volist}}
             </select>
             <span class="help-block">请选择父级分类</span>
         </div>
         <div class="form-group">
             <label class="control-label">产品品牌：</label>
             <select name="bid" class="form-control">
-                @foreach($brand as $v)
+                {{volist name="brand" id="v"}}
                     <option value="{{$v->id}}"
-                            @if($v->id == $col->bid) selected="selected" @endif>{{$v->bname}}</option>
-                @endforeach
+                            {{if condition="$v->id == $col->bid"}}selected="selected"{{/if}}>
+                            {{$v->bname}}</option>
+                {{/volist}}
             </select>
             <span class="help-block">请选择父级分类</span>
         </div>
@@ -78,12 +78,11 @@
         <div class="form-group">
             <input type="submit" value="提交" class="btn btn-primary">
         </div>
-        {{csrf_field()}}
     </form>
     <script type="text/javascript">
         function delImg(imgId) {
             $.ajax({
-                url: "{{url('admin/product/delimg')}}",
+                url: "{{:url('admin/product/delImg')}}",
                 type: 'get',
                 data: 'imgId=' + imgId,
                 dataType: 'json',
@@ -95,4 +94,4 @@
             })
         }
     </script>
-@endsection
+{{/block}}

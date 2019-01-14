@@ -18,7 +18,7 @@ class User extends Model
         return $this->save($args);
     }
 
-//    protected $autoWriteTimestamp = true;
-//    protected $createTime = 'createtime';
-//    protected $updateTime = 'updatetime';
+    protected $autoWriteTimestamp = 'datetima';
+    protected $createTime = 'createtime';
+    protected $updateTime = 'updatetime';
 }

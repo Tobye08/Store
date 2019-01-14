@@ -2,7 +2,7 @@ create database store charset = UTF8;
 
 create table `store_user`(
 `id` int unsigned primary key auto_increment comment '主键',
-`phone` int(11) UNIQUE NOT NULL COMMENT '手机号',
+`phone` varchar(11) UNIQUE NOT NULL COMMENT '手机号',
 `username` varchar(50) not null comment '用户名',
 `password` varchar(80) not null comment '密码',
 `email` varchar (50) comment '邮箱',
