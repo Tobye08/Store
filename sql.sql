@@ -46,5 +46,10 @@ create table `store_brand`(
  `cid` int not null default 0 comment '分类id'
 )engine=InnoDB charset=UTF8 comment='品牌表';
 
-
+create table `store_gift`(
+ `id` int unsigned primary key auto_increment comment '主键',
+ `name` varchar(50) not null comment '奖品名称',
+ `num` int not null default 0 comment '奖品数量',
+ `image` varchar(100) comment '奖品图片'
+)engine=InnoDB charset=UTF8 comment='奖品表';
 

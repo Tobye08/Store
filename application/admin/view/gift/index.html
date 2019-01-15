@@ -1,0 +1,61 @@
+{{extend name="public/admin"}}
+{{block name="title"}}产品管理{{/block}}
+{{block name="link"}}
+    <link rel="stylesheet" href="__CSS__/admin/category/index.css">
+{{/block}}
+{{block name="main"}}
+    <div class="manager">
+        <a class="path">产品案例 :</a>
+        <div class="tablelist">
+            <h3>产品列表</h3>
+            <div class="path-right">
+                <span class="show-1">
+                    <a href="{{:url('index/gift/index')}}">
+                        <button class="button">进入抽奖页</button>
+                    </a>
+                </span>
+                <span class="show-1">
+                    <a href="{{:url('admin/gift/add')}}">
+                        <button class="button">添加奖品</button>
+                    </a>
+                </span>
+            </div>
+
+            <table class="table table-condensed table-striped table-hover table-responsive">
+                <thead>
+                <th><input type="checkbox"></th>
+                <th>ID</th>
+                <th>奖品名称</th>
+                <th>奖品数量</th>
+                <th>奖品图片</th>
+                <th>操作</th>
+                </thead>
+                <tbody>
+                {{volist name="cols" id="v"}}
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>{{$v->id}}</td>
+                        <td>{{$v->name}}</td>
+                        <td>{{$v->num}}</td>
+                        <td><img src="__STATIC__/gift/{{$v->image}}" style="height: 100px;"></td>
+                        <td>
+                            <a href="{{:url('admin/gift/update',['id'=>$v['id']])}}"><span class="glyphicon glyphicon-edit"></span>&nbsp;</a>
+                            <a href="{{:url('admin/gift/del',['id'=>$v['id']])}}"><span class="glyphicon glyphicon-trash"></span></a>
+                        </td>
+                    </tr>
+                {{/volist}}
+                </tbody>
+            </table>
+            <div class="control">
+                <div mode="batchswitch" class="batch show-1" modebinded="true"><span
+                            class="text">对选中记录进行批量切换操作</span><select class="batch">
+                        <option value="null">请选择</option>
+                        <option value="delete">删除</option>
+                    </select><span class="ok" confirm_b3="取消操作" confirm_b2="确认操作"
+                                   confirm_text="确认对选中的进行批量操作吗？"><a href="">确认操作</a></span>
+                </div>
+                <div class="pagi"></div>
+            </div>
+        </div>
+    </div>
+{{/block}}
