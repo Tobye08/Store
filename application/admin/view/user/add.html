@@ -1,5 +1,7 @@
 {{extend block name='public/admin'}}
-{{block name='title'}}添加用户{{/block}}
+{{block name='title'}}
+<a href="{{:url('admin/user/index')}}">用户管理></a>添加用户
+{{/block}}
 {{block name='link'}}
     <link rel="stylesheet" type="text/css" href="__STATIC__/css/admin/user/add.css">
 {{/block}}

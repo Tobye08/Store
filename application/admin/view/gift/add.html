@@ -1,5 +1,7 @@
 {{extend name="public/admin"}}
-{{block name="title"}}添加礼物{{/block}}
+{{block name="title"}}
+<a href="{{:url('admin/gift/index')}}">礼物管理></a>添加礼物
+{{/block}}
 {{block name="main"}}
     <form action="{{:url('admin/gift/save')}}" method="post" enctype="multipart/form-data">
         <div class="form-group">

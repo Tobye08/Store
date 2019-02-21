@@ -1,5 +1,7 @@
 {{extend name="public/admin"}}
-{{block name="title"}}修改品牌{{/block}}
+{{block name="title"}}
+<a href="{{:url('admin/brand/index')}}">品牌管理></a>修改品牌
+{{/block}}
 {{block name="main"}}
     <form action="{{:url('admin/brand/usave')}}" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="{{$col->id}}">

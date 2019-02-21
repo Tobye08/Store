@@ -1,5 +1,7 @@
 {{extend name="public/admin"}}
-{{block name="title"}}添加产品{{/block}}
+{{block name="title"}}
+<a href="{{:url('admin/product/index')}}">产品管理></a>添加产品
+{{/block}}
 {{block name="main"}}
     <form action="{{:url('admin/product/save')}}" method="post" enctype="multipart/form-data">
         <div class="form-group">
